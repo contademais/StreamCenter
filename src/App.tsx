@@ -6,9 +6,10 @@ import Card from "./components/Card";
 
 import type IStreaming from "./Interfaces/IStreaming";
 
-import Modal from "./components/Modal";
+import ModalEdit from "./components/ModalEdit";
 
 import type IPatchStreaming from "./Interfaces/IPatchStreaming";
+import ModalSubs from "./components/ModalSubs";
 
 function App() {
   const [Streamings, setStreaming] = useState<IStreaming[]>([
@@ -56,6 +57,8 @@ function App() {
   const [modalInfo, setModalInfo] = useState<IStreaming | null | undefined>(
     null,
   );
+
+  const [assinaturasModal, setAssinaturasModal] = useState<Boolean>(false);
 
   function CancelarStreaming(Id: number) {
     setStreaming((prev) => prev.filter((s) => s.Id !== Id));
@@ -153,22 +156,42 @@ function App() {
             StreamCenter - Centralize seus serviços!
           </h1>
 
-          <button
-            onClick={AddStreaming}
-            className="
-              rounded-lg
-              bg-violet-600
-              px-4
-              py-2
-              font-semibold
-              text-white
-              transition
-              hover:bg-violet-500
-              active:scale-95
-            "
-          >
-            + Adicionar Streaming
-          </button>
+          <div className="flex gap-10">
+            <button
+              onClick={() => setAssinaturasModal(true)}
+              className="
+                  rounded-lg
+                  bg-violet-600
+                  px-4
+                  py-2
+                  font-semibold
+                  text-white
+                  transition
+                  hover:bg-violet-500
+                  active:scale-95
+                  cursor-pointer
+                "
+            >
+              Assinaturas
+            </button>
+            <button
+              onClick={AddStreaming}
+              className="
+                rounded-lg
+                bg-violet-600
+                px-4
+                py-2
+                font-semibold
+                text-white
+                transition
+                hover:bg-violet-500
+                active:scale-95
+                cursor-pointer
+              "
+            >
+              + Adicionar Streaming
+            </button>
+          </div>
         </nav>
 
         {/* CONTEÚDO */}
@@ -206,13 +229,17 @@ function App() {
         </main>
       </div>
 
-      {/* MODAL */}
+      {/* MODAL EDIT */}
       {modalInfo != null && (
-        <Modal
+        <ModalEdit
           modalInfo={modalInfo}
           setModalInfo={setModalInfo}
           patchStreaming={patchStreaming}
         />
+      )}
+      {/* MODAL SUBSCRIPTIONS */}
+      {assinaturasModal && (
+        <ModalSubs setAssinaturasModal={setAssinaturasModal} />
       )}
     </div>
   );

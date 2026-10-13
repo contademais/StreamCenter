@@ -9,7 +9,7 @@ interface Props {
   patchStreaming: (novoStream: IPatchStreaming) => void;
 }
 
-function Modal({ modalInfo, setModalInfo, patchStreaming }: Props) {
+function ModalEdit({ modalInfo, setModalInfo, patchStreaming }: Props) {
   const nomeRef = useRef<HTMLInputElement>(null);
   const senhaRef = useRef<HTMLInputElement>(null);
   const dataParaCancelarRef = useRef<HTMLInputElement>(null);
@@ -131,4 +131,4 @@ function Modal({ modalInfo, setModalInfo, patchStreaming }: Props) {
   );
 }
 
-export default Modal;
+export default ModalEdit;
